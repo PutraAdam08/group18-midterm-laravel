@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Category;
 
-class CategoryController extends Controller
+class BrandController extends Controller
 {
-    public function create_category(Request $request){
+    public function create_brand(Request $request){
         $request->validate(
             ['name'=>'required'],
-            ['name.required'=>'Category name cannot be empty']
+            ['name.required'=>'brand name cannot be empty']
         );
-        Category::create([
+        Brand::create([
             'name'=>$request->name,
             'slug'=>Str::slug($request->name)
         ]);
     }
 
-    public function edit_category($id,Request $request){
+    public function edit_brand($id,Request $request){
         $request->validate([
             'name' => 'required'
         ]);
-        $category = Category::findOrFail($id);
+        $brand = Brand::findOrFail($id);
         $newData = [
             'nama'=>$request->name,
             'slug'=>Str::slug($request->name)
         ];
-        $category->update($newData);
+        $brand->update($newData);
     }
 
-    public function delete_category($id)
+    public function delete_brand($id)
     {
-        $category = Category::findorfail($id);
-        $category->delete();
+        $brand = Brand::findorfail($id);
+        $brand->delete();
         //return redirect('/menus');
     }
 }
