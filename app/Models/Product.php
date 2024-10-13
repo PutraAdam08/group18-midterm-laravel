@@ -9,6 +9,14 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'price', 'image'];
+    // Add stock, brand_id, and category_id to the fillable array
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'image',
+        'stock',
+        'brand_id',
+        'category_id'
+    ];
 }
-

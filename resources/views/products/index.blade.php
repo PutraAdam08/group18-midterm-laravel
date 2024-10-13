@@ -1,4 +1,3 @@
-{{-- resources/views/products/index.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
@@ -25,6 +24,9 @@
                 <th><a href="{{ route('products.index', ['sort' => 'name', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}">Name</a></th>
                 <th><a href="{{ route('products.index', ['sort' => 'price', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}">Price</a></th>
                 <th>Description</th>
+                <th>Stock</th> <!-- Added Stock Column -->
+                <th>Brand ID</th> <!-- Added Brand Column -->
+                <th>Category ID</th> <!-- Added Category Column -->
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,6 +36,9 @@
                     <td>{{ $product->name }}</td>
                     <td>${{ $product->price }}</td>
                     <td>{{ $product->description }}</td>
+                    <td>{{ $product->stock }}</td> <!-- Display Stock -->
+                    <td>{{ $product->brand_id }}</td> <!-- Display Brand ID -->
+                    <td>{{ $product->category_id }}</td> <!-- Display Category ID -->
                     <td>
                         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
