@@ -14,11 +14,11 @@
         </div>
     @endif
 
-    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="/create" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" id="name" class="form-control" required>
+            <input type="text" name="title" id="name" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -49,7 +49,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Create Product</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">Back to Product List</a>
+        <a href="/" class="btn btn-secondary">Back to Product List</a>
     </form>
 </div>
 @endsection

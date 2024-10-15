@@ -10,16 +10,40 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::create('products', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->text('description');
-        $table->decimal('price', 8, 2);  // Allows prices with 2 decimal places (e.g., 99.99)
-        $table->string('image')->nullable();  // Image URL can be nullable
-        $table->timestamps();  // Adds created_at and updated_at fields automatically
-    });
-}
+    {
+        Schema::create('brands', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->timestamps();
+        });
+        
+
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->timestamps();
+        });
+
+        Schema::create('cards', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->bigInteger('price');
+            $table->integer('stock');
+            $table->foreignId('brand_id')->constrained(
+                table: 'brands',
+                indexName: 'card_brand_id'
+            );
+            $table->foreignId('category_id')->constrained(
+                table: 'categories',
+                indexName: 'card_category_id'
+            );
+            $table->string('image');
+            $table->timestamps();
+        });
+    }
 
 
     /**
