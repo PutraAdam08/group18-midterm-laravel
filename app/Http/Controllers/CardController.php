@@ -14,6 +14,7 @@ class CardController extends Controller
         $validator = Validator::make($request->all(), [
             'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title'     =>  'required',
+            'description' => 'required',
             'price'   =>  'required',
             'stock' => 'required',
             'brand_id' => 'required',
@@ -31,6 +32,7 @@ class CardController extends Controller
             'image'     =>  $image->hashName(),
             'title'     =>  $request->title,
             'slug'      => Str::slug($request->title),
+            'description' => $request->description,
             'price'   =>  $request->price,
             'stock' => $request->stock,
             'brand_id' => $request->brand_id,
@@ -42,8 +44,9 @@ class CardController extends Controller
 
     public function edit_card($id, Request $request){
         $validator = Validator::make($request->all(), [
-            'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title'     =>  'required',
+            'description' => 'required',
             'price'   =>  'required',
             'stock' => 'required',
             'brand_id' => 'required',
@@ -66,6 +69,7 @@ class CardController extends Controller
                 'image'     =>  $image->getClientOriginalName(),
                 'title'     =>  $request->title,
                 'slug'      => Str::slug($request->title),
+                'description' => $request->description,
                 'price'   =>  $request->price,
                 'stock' => $request->stock,
                 'brand_id' => $request->brand_id,
@@ -75,6 +79,7 @@ class CardController extends Controller
             $card->update([
                 'title'     =>  $request->title,
                 'slug'      => Str::slug($request->title),
+                'description' => $request->description,
                 'price'   =>  $request->price,
                 'stock' => $request->stock,
                 'brand_id' => $request->brand_id,

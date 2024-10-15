@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Product List</h1>
-    <a href="" class="btn btn-primary">Create New Product</a>
+    <a href="/create" class="btn btn-primary">Create New Product</a>
 
     <div class="d-flex flex-row mt-3">
         <!-- Search Form -->
@@ -28,18 +28,19 @@
 
     <div class="mt-4 row">
         @foreach ($cards as $card)
-            <div class="col-md">
-            <div class="card mb-4 shadow-sm bg-secondary">
-    <img src="" class="card-img-top" alt="{{ $card->title }}">
-    <div class="card-body">
-        <h5 class="card-title">{{ $card->title }}</h5>
-        <p class="card-text">
-            <strong>Price:</strong> ${{ number_format($card->price, 2) }}<br>
-            <strong>Stock:</strong> {{ $card->stock }} available<br>
-            <strong>Description:</strong> {{ $card->description }}<br>
-        </p>
-    </div>
-</div>
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm bg-secondary">
+                    <img src="{{ asset("storage/cards/$card->image") }}" class="card-img-top" alt="{{ $card->title }}" style="width: auto">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $card->title }}</h5>
+                        <p class="card-text">
+                            <strong>Price:</strong> ${{ number_format($card->price, 2) }}<br>
+                            <strong>Stock:</strong> {{ $card->stock }} available<br>
+                            <strong>Description:</strong> {{ Str::limit($card->description,30)  }}<br>
+                            <a href="{{ route("edit", ['card' => $card->slug]) }}"><button type="submit" class="btn btn-primary">Edit</button></a>
+                        </p>
+                    </div>
+                </div>
             </div>        
         @endforeach
     </div>

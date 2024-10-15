@@ -16,6 +16,7 @@ class Card extends Model
     protected $fillable = [
         'title',
         'slug',
+        'description',
         'price',
         'stock',
         'image',

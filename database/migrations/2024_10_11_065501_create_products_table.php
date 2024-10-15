@@ -30,6 +30,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->text('description');
             $table->bigInteger('price');
             $table->integer('stock');
             $table->foreignId('brand_id')->constrained(
